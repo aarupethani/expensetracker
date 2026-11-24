@@ -52,7 +52,7 @@ export default function ExpenseForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    const Expenses = JSON.parse(localStorage.getItem("expences") || "[]");
+    const Expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
     const newExpenses = { ...formData, id: uuidv4() };
 
     console.log(
@@ -60,7 +60,7 @@ export default function ExpenseForm() {
       newExpenses
     );
 
-    localStorage.setItem("expences", JSON.stringify([...Expenses,newExpenses]))
+    localStorage.setItem("expenses", JSON.stringify([...Expenses,newExpenses]))
   navigate("/")
 
   };

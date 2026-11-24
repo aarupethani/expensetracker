@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import "../style/ExpenseList.css";
 import ConfirmationModel from "./ConfirmationModel";
 import EditModel from "./EditModel";
+import { useNavigate } from "react-router-dom";
 
 function ExpenseList() {
     const [expenses, setExpenses] = useState([]);
     const [deleteExpense, setDeleteExpenses] = useState(null);
     const [openModel, setOpenModel]=useState(false);
     const [editId,setEditId]=useState(null);
+    const navigate = useNavigate();
 
     const loadExpenses = () => {
-        const savedExpenses = JSON.parse(localStorage.getItem("expences") || "[]");
+        const savedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
         setExpenses(savedExpenses);
     };
 
@@ -23,6 +25,7 @@ function ExpenseList() {
         (sum, item) => sum + Number(item.amount),
         0,
     );
+
     const handleDelete=(id)=>{
         const updateExpense=expenses.filter(
             (item)=>item.id !==id
@@ -39,6 +42,12 @@ function ExpenseList() {
     const editHandler =(id)=>{
         setEditId(id);
         setOpenModel(true);
+    };
+
+    //read more handler
+
+    const handleReadMore = (id) =>{
+        navigate(`/expenseDetails/${id}`);
     };
 
     return (
@@ -83,9 +92,19 @@ function ExpenseList() {
                                     <td>{expenses.date}</td>
                                     <td>{expenses.category}</td>
                                     <td className="table-actions">
-                                        <button className="btn-delete" onClick={()=>setDeleteExpenses(expenses)}>Delete</button>
-                                        <button className="btn-edit" onClick={() => editHandler(expenses.id)}>Edit</button>
-                                        <button className="btn-readmore">View</button>
+                                        <button className="btn-delete" 
+                                        onClick={()=>setDeleteExpenses(expenses)}>
+                                            Delete
+                                            </button>
+
+                                        <button className="btn-edit"
+                                         onClick={() => editHandler(expenses.id)}>
+                                            Edit</button>
+
+                                        <button className="btn-readmore"
+                                         onClick={() =>handleReadMore(expenses.id)}>
+                                            Read More
+                                            </button>
                                     </td>
                                 </tr>
                             ))
@@ -117,7 +136,11 @@ function ExpenseList() {
             />
             )}
             {openModel && editId !== null &&(
-                <EditModel/>
+                <EditModel
+                editId={editId}
+                onClose={() => setOpenModel(false)}
+                onUpdate={loadExpenses}
+                />
 
             )}
             
