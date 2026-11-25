@@ -1,10 +1,10 @@
-.main-container{
+.main-container {
     background-color: #5A7ACD;
     width: 100%;
 }
 
 /*Navbar layout*/
-.nav-container{
+.nav-container {
     width: 1000px;
     padding: 14px 20px;
     display: flex;
@@ -14,7 +14,7 @@
 }
 
 /*app title*/
-.nav-container h1{
+.nav-container h1 {
     color: #ffffff;
     font-size: 26px;
     font-weight: 600;
@@ -22,14 +22,14 @@
 }
 
 /*nav links wrapper*/
-.nav-link{
+.nav-link {
     display: flex;
     align-items: center;
     gap: 35px;
 
 }
 
-.nav-link ul{
+.nav-link ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -46,18 +46,25 @@
     transition: all 0.3s ease;
 }
 
-.links:hover{
+.links:hover {
     background-color: #FEB05D;
     color: #2B2A2A;
 }
 
-.nav-actions{
+/* activ route */
+
+.links.active {
+    background-color: #FEB05D;
+    color: #2B2A2A;
+}
+
+.nav-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.theme-toggle{
+.theme-toggle {
     width: 36px;
     height: 36px;
     border: none;
@@ -71,18 +78,18 @@
     transition: all 0.3s ease;
 }
 
-.theme-toggle:hover{
+.theme-toggle:hover {
     color: #FEB05D;
     transform: scale(1.1);
 }
 
-.logout-btn{
+.logout-btn {
     background-color: #FEB05D;
     color: #2B2A2A;
-    font-weight: 600 ;
+    font-weight: 600;
 }
 
-.logout-btn:hover{
+.logout-btn:hover {
     background-color: #ffffff;
     color: #2B2A2A;
 }
