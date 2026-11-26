@@ -1,41 +1,47 @@
 import { FaMoon } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import '../style/Navbar.css';
-export default function Navbar(){
-    return(
+export default function Navbar() {
+
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.removeItem('user');
+        navigate('/login');
+    };
+    return (
         <div className="main-container">
-             <div className="nav-container">
+            <div className="nav-container">
                 <div>
                     <h1>Expense Tracker</h1>
                 </div>
 
                 <div className="nav-link">
                     <ul>
-                        <li><NavLink to="/"className="links">Home</NavLink></li>
+                        <li><NavLink to="/" className="links">Home</NavLink></li>
                     </ul>
 
                     <ul>
-                        <li><NavLink to="/add-expense"className="links">Add Expense</NavLink></li>
+                        <li><NavLink to="/add-expense" className="links">Add Expense</NavLink></li>
                     </ul>
 
                     <ul>
-                        <li><a href=""className="links">Expense Items</a></li>
+                        <li><NavLink to="/expense-items" className="links">Expense Items</NavLink></li>
                     </ul>
 
                 </div>
                 <div className="nav-actions">
                     <button type="button" className="theme-toggle">
-                         
-                         
-                        <FaMoon/>
+
+
+                        <FaMoon />
                     </button>
 
-                    <a href=""className="links logout-btn">
+                    <a href="" className="links logout-btn" to="" onClick={logout}>
                         logout
                     </a>
                 </div>
-             </div>
+            </div>
         </div>
     );
 

@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 function ExpenseList() {
     const [expenses, setExpenses] = useState([]);
+    const [filter, setFilter] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
     const [deleteExpense, setDeleteExpenses] = useState(null);
-    const [openModel, setOpenModel]=useState(false);
-    const [editId,setEditId]=useState(null);
+    const [openModel, setOpenModel] = useState(false);
+    const [editId, setEditId] = useState(null);
     const navigate = useNavigate();
 
     const loadExpenses = () => {
@@ -26,27 +28,44 @@ function ExpenseList() {
         0,
     );
 
-    const handleDelete=(id)=>{
-        const updateExpense=expenses.filter(
-            (item)=>item.id !==id
+    //filtered expenses
+    const filteredExpenses = expenses.filter((item) => {
+        const matchesCategory = filter === 'all' || item.category === filter;
+        const matchesSearch = item.description.toLowerCase().
+            includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    //handlers
+
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+    const handleDelete = (id) => {
+        const updateExpense = expenses.filter(
+            (item) => item.id !== id
         );
 
         localStorage.setItem(
             "expense",
             JSON.stringify(updateExpense)
         );
-        
+
         setExpenses(updateExpense);
         setDeleteExpenses(null);
     }
-    const editHandler =(id)=>{
+    const editHandler = (id) => {
         setEditId(id);
         setOpenModel(true);
     };
 
     //read more handler
 
-    const handleReadMore = (id) =>{
+    const handleReadMore = (id) => {
         navigate(`/expenseDetails/${id}`);
     };
 
@@ -60,15 +79,20 @@ function ExpenseList() {
                     </div>
 
                     <div>
-                        <select>
-                            <option>All categories</option>
-                            <option>Food</option>
-                            <option>Travel</option>
-                            <option>Shopping</option>
-                            <option>Entertainment</option>
+                        <select value={filter} onChange={handleFilterChange}>
+                            <option value="all">All </option>
+                            <option value="food">Food</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="education">Education</option>
+                            <option value="phoneBill">PhoneBill</option>
+                            <option value="entertainment">Entertainment</option>
+
                         </select>
 
-                        <input type="search" placeholder="search expense..." />
+                        <input type="search" placeholder="search expense..."
+                            value={searchTerm}
+                            onChange={handleSearchChange} />
                     </div>
                 </div>
 
@@ -84,27 +108,27 @@ function ExpenseList() {
                     </thead>
 
                     <tbody>
-                        {expenses.length > 0 ? (
-                            expenses.map((expenses) => (
+                        {filteredExpenses.length > 0 ? (
+                            filteredExpenses.map((expenses) => (
                                 <tr key={expenses.id}>
                                     <td>{expenses.amount}</td>
                                     <td>{expenses.description}</td>
                                     <td>{expenses.date}</td>
                                     <td>{expenses.category}</td>
                                     <td className="table-actions">
-                                        <button className="btn-delete" 
-                                        onClick={()=>setDeleteExpenses(expenses)}>
+                                        <button className="btn-delete"
+                                            onClick={() => setDeleteExpenses(expenses)}>
                                             Delete
-                                            </button>
+                                        </button>
 
                                         <button className="btn-edit"
-                                         onClick={() => editHandler(expenses.id)}>
+                                            onClick={() => editHandler(expenses.id)}>
                                             Edit</button>
 
                                         <button className="btn-readmore"
-                                         onClick={() =>handleReadMore(expenses.id)}>
+                                            onClick={() => handleReadMore(expenses.id)}>
                                             Read More
-                                            </button>
+                                        </button>
                                     </td>
                                 </tr>
                             ))
@@ -125,25 +149,25 @@ function ExpenseList() {
                     </tbody>
                 </table>
             </div>
-            {deleteExpense !== null &&(
-            <ConfirmationModel
-                title="Delete Expense"
-                message="Are you sure you want to delete this expense?"
-                confirmText="Delete"
-                cancelText="Cancel"
-                oncancel={() => setDeleteExpenses(null) }
-                onConfirm={() => handleDelete(deleteExpense.id) }
-            />
+            {deleteExpense !== null && (
+                <ConfirmationModel
+                    title="Delete Expense"
+                    message="Are you sure you want to delete this expense?"
+                    confirmText="Delete"
+                    cancelText="Cancel"
+                    oncancel={() => setDeleteExpenses(null)}
+                    onConfirm={() => handleDelete(deleteExpense.id)}
+                />
             )}
-            {openModel && editId !== null &&(
+            {openModel && editId !== null && (
                 <EditModel
-                editId={editId}
-                onClose={() => setOpenModel(false)}
-                onUpdate={loadExpenses}
+                    editId={editId}
+                    onClose={() => setOpenModel(false)}
+                    onUpdate={loadExpenses}
                 />
 
             )}
-            
+
         </>
     );
 }
