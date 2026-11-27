@@ -3,8 +3,10 @@ import "../style/ExpenseList.css";
 import ConfirmationModel from "./ConfirmationModel";
 import EditModel from "./EditModel";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 function ExpenseList() {
+    const { theme } = useTheme();
     const [expenses, setExpenses] = useState([]);
     const [filter, setFilter] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
@@ -71,9 +73,9 @@ function ExpenseList() {
 
     return (
         <>
-            <div className="ExpenseList">
+            <div className={`ExpenseList ${theme}`}>
                 <div className="list-search">
-                    <div>
+                    <div div>
                         <h1>your expenses</h1>
                         <p className="list-help">search,edit,or remove an expense below.</p>
                     </div>

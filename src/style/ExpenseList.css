@@ -1,29 +1,35 @@
-.ExpenseList{
+.ExpenseList {
     width: 75%;
     margin: 40px auto;
     background-color: #ffffff;
     color: #2b2a2a;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.ExpenseList.dark {
+    background-color: #374151;
+    color: #ffffff;
 }
 
 /* header + search */
-.list-search{
+.list-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
 
 }
-.list-search h1{
+
+.list-search h1 {
     color: #2b2a2a;
     font-size: 26px;
     font-weight: 600;
     margin: 0;
 }
 
-.list-help{
+.list-help {
     margin-top: 6px;
     color: #6b7280;
     font-size: 14px;
@@ -33,7 +39,7 @@
 /* search & filter */
 
 .list-search select,
-.list-search input{
+.list-search input {
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -45,14 +51,14 @@
 }
 
 .list-search select:focus,
-.list-search input:focus{
+.list-search input:focus {
     border-color: #5A7ACD;
-    box-shadow: 0 0 0 2px rgba(90,122,205,0.15);
+    box-shadow: 0 0 0 2px rgba(90, 122, 205, 0.15);
 }
 
 /* table */
 
-.ExpenseList table{
+.ExpenseList table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
@@ -61,7 +67,7 @@
 
 /* table header */
 
-.ExpenseList th{
+.ExpenseList th {
     background-color: #5A7ACD;
     color: #ffffff;
     padding: 12px;
@@ -71,7 +77,7 @@
 
 /* TABLE ROW */
 
-.ExpenseList td{
+.ExpenseList td {
     padding: 12px;
     border-bottom: 1px solid #eee;
     color: #2b2a2a;
@@ -79,19 +85,20 @@
 }
 
 /* table hover effect */
-.ExpenseList tbody tr:hover td{
+.ExpenseList tbody tr:hover td {
     background-color: #ffffff;
 
 }
+
 /* action buttons */
-.table-actions{
+.table-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
 }
 
 /* edit button */
-.btn-edit{
+.btn-edit {
     background-color: #FEB05D;
     color: #2b2a2a;
     border: none;
@@ -102,14 +109,14 @@
     transition: 0.3s;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     background-color: #fda737;
     transform: translateY(-2px);
 }
 
 /* delete button */
 
-.btn-delete{
+.btn-delete {
     background-color: #e74c3c;
     color: #ffffff;
     border: none;
@@ -119,14 +126,15 @@
     font-weight: 500;
     transition: 0.3s;
 }
-.btn-delete:hover{
+
+.btn-delete:hover {
     background-color: #e74c3c;
     transform: translateY(-2px);
 }
 
 /* view button */
-.btn-readmore{
-    background: linear-gradient(135deg,#5A7ACD,#7b9bff);
+.btn-readmore {
+    background: linear-gradient(135deg, #5A7ACD, #7b9bff);
     color: #ffffff;
     border: none;
     padding: 6px 14px;
@@ -137,14 +145,14 @@
 
 }
 
-.btn-readmore:hover{
+.btn-readmore:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(90,122,205,0.4);
+    box-shadow: 0 4px 10px rgba(90, 122, 205, 0.4);
 }
 
 /* total amount */
 
-.expense-total td{
+.expense-total td {
     font-weight: 600;
     text-align: right;
     background-color: #ffffff;
@@ -154,7 +162,7 @@
 }
 
 /* empty state */
-.no-data{
+.no-data {
     text-align: center;
     padding: 20px;
     color: #888;
@@ -162,19 +170,13 @@
 }
 
 /* loading and error message */
-.items-message{
+.items-message {
     padding: 12px;
     text-align: center;
     color: #7b9bff;
 
 }
 
-.items-error{
+.items-error {
     color: #e74c3c;
 }
-
-
-
-
-
-
